@@ -1,0 +1,832 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Chapter 3 - Conditional Statements</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="83c88b05-2f3a-445b-b5e6-dab8347e49e2" class="page sans"><header><h1 class="page-title">Chapter 3 - Conditional Statements</h1><p class="page-description"></p></header><div class="page-body"><h1 id="57f0bdb4-cd6a-44ac-8a83-36435aac6b1b" class="">C if … Else</h1><hr id="c5906428-5ea6-4620-9a30-9ede63611d53"/><h2 id="d46efbeb-5ae9-4480-bea8-53cef20c164f" class=""><strong>Conditions and If Statements</strong></h2><hr id="50081b59-bb62-4778-89b7-68dcdd592be6"/><ul id="78c8ac4d-86fc-4b69-9857-b7bb5e064566" class="bulleted-list"><li style="list-style-type:disc">You can use the conditions operators to perform different actions for different decisions.</li></ul><ul id="f22b408b-c892-4c36-8866-a720f0388e4a" class="bulleted-list"><li style="list-style-type:disc">Use <code>if</code> to specify a block of code to be executed, if a specified condition is <code>true</code>.</li></ul><ul id="9f80b809-060f-4f2b-b698-6c9e82b09f9c" class="bulleted-list"><li style="list-style-type:disc">Use <code>else</code> to specify a block of code to be executed, if the same condition is <code>false</code>.</li></ul><ul id="1e5aacee-d3c5-42c8-9e6a-3288675c66d9" class="bulleted-list"><li style="list-style-type:disc">Use <code>else if</code> to specify a new condition to test, if the first condition is <code>false</code>.</li></ul><ul id="43cbcb8b-5a70-48a9-b9fa-0660c32896fc" class="bulleted-list"><li style="list-style-type:disc">Use <code>switch</code> to specify many alternative blocks of code to be executed.</li></ul><h2 id="7cdf4238-3a73-4045-b58d-0c660a2f1654" class=""><strong>The if Statement</strong></h2><hr id="5f4aa9c3-69ef-43b5-a3ef-82e9b8342eae"/><p id="2dd498bd-e5df-4261-b360-5816e3e3e129" class="">Use the <code>if</code> statement to specify a block of code to be executed if a condition is <code>true</code>.</p><blockquote id="436fd802-a6d5-445c-b56e-5058e2defa7f" class=""><span style="border-bottom:0.05em solid"><strong>Syntax</strong></span><pre id="fcc4f850-acce-4453-acd2-ebcc3a6bfb2f" class="code"><code>if (condition) {
+	// block of code to be executed if the condition is true
+}</code></pre></blockquote><blockquote id="e8ce9a37-4b76-4986-a12e-982754e28bf7" class="block-color-red_background">NOTE : <code>if</code> is in lowercase letter. uppercase letters (if or IF) will generate an error.</blockquote><blockquote id="8fbd9913-c8ca-44b7-b897-66f8f320215a" class=""><span style="border-bottom:0.05em solid"><strong>Example
+</strong></span>In the example below, we test two values to find out if 20 is greater than 18. if the condition is <code>true</code>, print some text.<pre id="6a9b3829-6251-4c3d-8fa1-a63438dc3f1a" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int x = 20;
+  int y = 18;
+  if (x &gt; y) {
+    printf(&quot;x is greater than y&quot;);
+  }  
+  return 0;
+}</code></pre></blockquote><h2 id="a8df4aaa-60d2-4011-8f6a-fb2167b82713" class=""><strong>The else Statement</strong></h2><hr id="6ad38e0d-3c05-46be-9687-150535c1c028"/><p id="27ebc7c9-3fe6-4d42-8242-502e15ca834d" class="">Use the <code>else</code> statement to specify a block of code to be executed if the condition is <code>false</code>.</p><blockquote id="4e60a57e-d65d-4eed-8546-bc38e47030da" class=""><span style="border-bottom:0.05em solid"><strong>Syntax</strong></span><pre id="33e7173c-8453-4619-9521-19ec0cddce14" class="code"><code>if (condition) {
+  // block of code to be executed if the condition is true
+} else {
+  // block of code to be executed if the condition is false
+}</code></pre></blockquote><blockquote id="eb401a32-aa04-4d06-a467-18be3b9d9d14" class=""><strong><span style="border-bottom:0.05em solid">Example
+</span></strong>In this example time is 20, which is greater than 18, so the condition is <code>false</code>, we will get the <code>else</code> block code.<pre id="abc7e0c7-9c37-4da9-a67b-89da95bf1d13" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int time = 20;
+  if (time &lt; 18) {
+    printf(&quot;Good day.&quot;);
+  } else {
+    printf(&quot;Good evening.&quot;);
+  }
+  return 0;
+}</code></pre></blockquote><h2 id="6feb9ba2-65af-4238-9c48-e1da81e54bed" class=""><strong>The else if Statement</strong></h2><hr id="6672fc67-8f21-46fb-9936-40752d6621ea"/><p id="e5de5241-6e68-4b19-97dc-b8566702eccd" class="">Use the <code>else if</code> statement to specify a new condition if the first condition is <code>false</code>.</p><blockquote id="b0ffdf9c-9e74-4a49-b694-15f4b62c4aa8" class=""><strong><span style="border-bottom:0.05em solid">Syntax</span></strong><pre id="f09bf15d-3dae-4ce2-a697-7f05835c7d30" class="code"><code>if (condition1) {
+  // block of code to be executed if condition1 is true
+} else if (condition2) {
+  // block of code to be executed if the condition1 is false and condition2 is true
+} else {
+  // block of code to be executed if the condition1 is false and condition2 is false
+}</code></pre></blockquote><blockquote id="45c5cac2-a119-4d2e-acd1-1a91ece9c39e" class=""><span style="border-bottom:0.05em solid"><strong>Example
+</strong></span>In the example time is 22 is greater than 10, so the <strong>first condition</strong> is <code>false</code>. The next condition, in the <code>else if</code> statement, is also <code>false</code>, so we move on to the <code>else</code> condition since <strong>condition1</strong> and <strong>condition2</strong> is both <code>false</code> - and print to the screen &quot;Good evening&quot;.</blockquote><pre id="8a9598a0-4be3-4cde-81bc-67bf54084000" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int time = 22;
+  if (time &lt; 10) {
+    printf(&quot;Good morning.&quot;);
+  } else if (time &lt; 20) {
+    printf(&quot;Good day.&quot;);
+  } else {
+    printf(&quot;Good evening.&quot;);
+  }
+  return 0;
+}</code></pre><h1 id="219c2cf9-5372-4d6a-8079-7f80adfd7bd7" class=""><strong>Practice</strong></h1><hr id="a0c3d9e5-fcda-4adc-bdb0-5ae461a231ac"/><blockquote id="ec84dbb6-b566-450a-b9d2-c1de33b8df5c" class=""><span style="border-bottom:0.05em solid"><strong>Example 1.
+</strong></span>use <code>if … else</code> to find out if a number is positive or negative.</blockquote><pre id="746bc718-213d-4cdc-b78b-763b3b251941" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int myNum = 10;  // Is this a positive or negative number?
+  
+  if (myNum &gt; 0) {
+    printf(&quot;The value is a positive number.&quot;);
+  } else if (myNum &lt; 0) {
+    printf(&quot;The value is a negative number.&quot;);
+  } else {
+    printf(&quot;The value is 0.&quot;);
+  }
+  
+  return 0;
+}</code></pre><h1 id="9d7b09ec-69e4-405d-8cae-52fdc55849ef" class=""><strong>C Short Hand If Else (Ternary Operator)</strong></h1><hr id="4361477f-aea6-4b5a-98a4-e0f429f107fd"/><p id="3a98dfc2-6383-4a48-8ba8-1e58ef689287" class="">There is also a short-hand if else called as <strong>ternary operator </strong>because it consists of three operands.</p><blockquote id="7664f1ae-1f27-4554-890b-98527453be87" class=""><span style="border-bottom:0.05em solid"><strong>Syntax</strong></span><pre id="50caf016-4ed7-44a5-8c79-294e548c2316" class="code"><code>variable = (condition) ? expressionTrue : expressionFalse;</code></pre></blockquote><blockquote id="c974f451-8c40-4e52-913c-d5cfe88de9b6" class=""><span style="border-bottom:0.05em solid"><strong>Example</strong></span><pre id="1d014fc5-adfe-4f70-abbc-4a7cd3f97a21" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int time = 20;
+  (time &lt; 18) ? printf(&quot;Good day.&quot;) : printf(&quot;Good evening.&quot;);
+  return 0;
+}</code></pre></blockquote><h1 id="3ca738fa-a9ac-41ef-9d00-ab53b7605e2c" class=""><strong>C Switch</strong></h1><hr id="3e407720-6f20-4987-ab37-acb177fc66be"/><p id="a7d351b3-53e3-41d2-a573-8b89463cbfa2" class="">The switch statement selects one of many code blocks to be executed</p><ul id="fb2d5048-2d5e-4484-9d52-12df96993c56" class="bulleted-list"><li style="list-style-type:disc">The <code>switch</code> expression is evaluated once.</li></ul><ul id="d8cb7336-ce79-4104-ab40-a8300653f746" class="bulleted-list"><li style="list-style-type:disc">The value of the expression is compared with the values of each <code>case</code>.</li></ul><ul id="3c5e2c63-ae68-4469-93d0-fa5531083bda" class="bulleted-list"><li style="list-style-type:disc">If there is a match, the associated block of code is executed.</li></ul><ul id="0b0f125d-db84-468d-86c3-392deb74f3dd" class="bulleted-list"><li style="list-style-type:disc">The <code>break</code> statement breaks out of the switch block and stops the execution.</li></ul><ul id="db181d92-8d15-44f3-a9e5-90dcfa9ae92d" class="bulleted-list"><li style="list-style-type:disc">The <code>default</code> statement is optional, and specifies some code to run if there is no case match</li></ul><blockquote id="493261a1-56e2-42a2-9330-072f3bffaafa" class=""><span style="border-bottom:0.05em solid"><strong>Syntax</strong></span><pre id="8e9798cc-349f-471e-8484-eb41b6af5ebc" class="code"><code>switch(expression) {
+  case x:
+    // code block
+    break;
+  case y:
+    // code block
+    break;
+  default:
+    // code block
+}</code></pre></blockquote><blockquote id="6f6a51eb-4a80-4760-bdca-6e503fb4a500" class=""><span style="border-bottom:0.05em solid"><strong>Example</strong></span><pre id="43cbdcf4-0c51-46a8-b5fc-cca9409f4515" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int day = 14;
+  
+  switch (day) {
+    case 1:
+      printf(&quot;Monday&quot;);
+      break;
+    case 2:
+      printf(&quot;Tuesday&quot;);
+      break;
+    case 3:
+      printf(&quot;Wednesday&quot;);
+      break;
+    case 4:
+      printf(&quot;Thursday&quot;);
+      break;
+    case 5:
+      printf(&quot;Friday&quot;);
+      break;
+    case 6:
+      printf(&quot;Saturday&quot;);
+      break;
+    case 7:
+      printf(&quot;Sunday&quot;);
+      break;
+  }
+    
+  return 0;
+}</code></pre><pre id="9e91bb00-4e13-44a0-baea-1dcde76038ba" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int day = 4;
+  
+  switch (day) {
+    case 1:
+      printf(&quot;Monday&quot;);
+      break;
+    case 2:
+      printf(&quot;Tuesday&quot;);
+      break;
+    case 3:
+      printf(&quot;Wednesday&quot;);
+      break;
+    case 4:
+      printf(&quot;Thursday&quot;);
+      break;
+    case 5:
+      printf(&quot;Friday&quot;);
+      break;
+    case 6:
+      printf(&quot;Saturday&quot;);
+      break;
+    case 7:
+      printf(&quot;Sunday&quot;);
+      break;
+    default:
+    printf(&quot;Invalid value&quot;);
+  }
+    
+  return 0;
+}</code></pre></blockquote><h3 id="aa9dab48-d652-4891-80cd-e489bbb2ba34" class=""><strong>The break Keyword</strong></h3><hr id="2814cc4e-a6ce-4147-90b2-eed4d1b0f7f9"/><p id="8b23ffd0-3e67-47eb-ab51-01b2df8825f9" class="">When C reaches a <code>break</code> keyword, it breaks out of the switch block. A break can save a lot of execution it ignores the execution of all the rest of the code in the switch block.</p><h3 id="f2fdfe28-e318-4ba2-82df-7bcd068023a7" class="">The default Keyword</h3><hr id="5ec61dad-789d-4a32-88be-c659c6de1983"/><ul id="9103bf85-4826-42b3-9e3e-48378238774c" class="bulleted-list"><li style="list-style-type:disc">The <code>default</code> keyword specifies some code to run if there is no case match.</li></ul><ul id="92de0366-85a8-4f8f-bbd6-11a895227b6a" class="bulleted-list"><li style="list-style-type:disc">The default keyword must be used as the last statement in the switch</li></ul><ul id="79cc99be-3bfa-49f5-95d6-934c48ea4d12" class="bulleted-list"><li style="list-style-type:disc">It does not need a <code>break</code>.</li></ul><blockquote id="2505b72c-e1c1-4dcd-a573-574f6696dbc5" class=""><strong><span style="border-bottom:0.05em solid">Example</span></strong><pre id="4e2cdc50-bcc6-418a-9c2f-f01806eefeb9" class="code"><code>#include &lt;stdio.h&gt;
+
+int main() {
+  int day = 4;
+  
+  switch (day) {
+  case 6:
+    printf(&quot;Today is Saturday&quot;);
+    break;
+  case 7:
+    printf(&quot;Today is Sunday&quot;);
+    break;
+  default:
+    printf(&quot;Looking forward to the Weekend&quot;);
+  }
+  
+  return 0;
+}</code></pre></blockquote><p id="66281733-88fc-4714-ad94-35e3ed60d3de" class="">
+</p></div></article></body></html>

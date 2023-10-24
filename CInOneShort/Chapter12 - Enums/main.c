@@ -3,7 +3,7 @@
 // -> User defined datatype
 // -> The values are defined as constants and can be assigned to variables or passed as arguments in function calls.
 // -> Uses defined type to assign name to integral constants. 
-
+// -> Use enum when you have values that you know aren't going to change, like month days, days, colors deck of cards, etc.
 #include <stdio.h>
 
 
@@ -14,7 +14,7 @@ enum Level {
 };
 
 int main() {
-    enum Level variable = LOW; 
+    enum Level variable = MEDIUM; 
 
     switch (variable) {
         case 25:

@@ -12,8 +12,8 @@ int main()
         hcf=i;
     }
     if(hcf==1)
-    printf("%d and %d are coprime",a,b);
+        printf("%d and %d are coprime",a,b);
     else
-    printf("%d and %d are  non cooprime",a,b);
+        printf("%d and %d are  non cooprime",a,b);
     return 0;
 }

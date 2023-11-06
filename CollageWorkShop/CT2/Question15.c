@@ -1,4 +1,4 @@
-// # Question 13. Define a recursion. Write a C recursive function for multiplying two intergers where a function call is passed with two integers m and n
+// # Question 15. Define a recursion. Write a C recursive function for multiplying two intergers where a function call is passed with two integers m and n
 /*
 Recursion is a programming technique where a function calls itself in order 
 to solve a problem. In a recursive function, the function breaks down a problem 
